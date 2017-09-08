@@ -11,3 +11,5 @@ ForEach ($File in (Get-ChildItem $Path -Include *.csv -Recurse))
     
    $outputline = $outputline + " | " + ((Get-Content $File.FullName |Measure-object -line).lines )
    Write-output $outputline | out-file $output -append 
+   
+}
