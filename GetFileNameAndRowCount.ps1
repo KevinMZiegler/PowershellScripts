@@ -8,7 +8,7 @@ ForEach ($File in (Get-ChildItem $Path -Include *.csv -Recurse))
 {
   
    $outputLine = $file.FullName  
-   $numberOfColumns = ((($fileData -replace "(`"[^;]+?)`r`n",'$1') -split "`r`n" | Select -First 1).split($delimiter)).Count 
+   $numberOfColumns = ((([array](get-content $file))[0]) -split ",").count
    
    $outputline = $outputline + " | " + ((Get-Content $File.FullName |Measure-object -line).lines ) + " | " + $numberOfColumns
    Write-output $outputline | out-file $output -append 
